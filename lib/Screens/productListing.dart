@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:interview/Helper/api.dart';
 import 'package:interview/Helper/jsonParser.dart';
 import 'package:interview/Models/productModel.dart';
@@ -28,21 +27,30 @@ class _ProductListingState extends State<ProductListing> {
     final apiClassObj = Api();
     Map? resultAPi = await apiClassObj.hitApi();
     setState(() {
-      _isLoading = false;
-      if (resultAPi == null) {
-        return;
+      if (resultAPi != null) {
+        _proudctModelList = JsonParserHelper.convertJsonToObject(resultAPi);
+      } else {
+        _proudctModelList = [];
       }
-      _proudctModelList = JsonParserHelper.convertJsonToObject(resultAPi);
-      print(_proudctModelList);
+      _isLoading = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading ? Center(child: CircularProgressIndicator()) : ListView.builder(
-      itemBuilder: (ctx, index) =>ProductListItem(_proudctModelList?[index]),
-      itemCount: _proudctModelList?.length,
-      physics: NeverScrollableScrollPhysics(),
-    );
+    return _isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : ((_proudctModelList?.length == 0)
+            ? const Center(
+                child: Text("No data yet"),
+              )
+            : Container(
+                height: MediaQuery.of(context).size.height - 100,
+                child: ListView.builder(
+                  itemBuilder: (ctx, index) =>
+                      ProductListItem(_proudctModelList?[index]),
+                  itemCount: _proudctModelList?.length,
+                ),
+              ));
   }
 }

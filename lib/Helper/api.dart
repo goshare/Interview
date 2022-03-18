@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-
 import 'dart:convert';
 
 class Api {
@@ -11,7 +10,6 @@ class Api {
       final response = await http.get(url);
       return json.decode(response.body) as Map;
     } catch (error) {
-      print("Getting error=$error");
       return;
     }
   }

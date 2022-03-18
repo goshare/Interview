@@ -4,7 +4,7 @@ import 'package:interview/Models/productModel.dart';
 class ProductDetail extends StatelessWidget {
   static const routeName = "ProductDetail";
 
-  // ProductDetail(this.productModelObject);
+  static const imageBaeUrl = "https://mobile-tha-server.firebaseapp.com/";
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class ProductDetail extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detail"),
+        title: const Text("Detail"),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -22,15 +22,25 @@ class ProductDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(
-                "https://mobile-tha-server.firebaseapp.com/${productModelObject.productImage}",
+                "$imageBaeUrl${productModelObject.productImage}",
                 fit: BoxFit.cover,
               ),
               Text(
-                productModelObject.productName,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                "Product Name: ${productModelObject.productName}",
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              Text(productModelObject.longDescription),
-              Text(productModelObject.price,style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+              const SizedBox(height: 10),
+              Text(
+                "Description: ${productModelObject.longDescription}",
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "Price: ${productModelObject.price}",
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

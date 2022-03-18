@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
        
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Interview'),
+      home: const MyHomePage(title: 'Products'),
       routes: {
         ProductDetail.routeName : (ctx)=> ProductDetail(),
       },

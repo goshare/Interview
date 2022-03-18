@@ -2,7 +2,6 @@ class ProductModel {
   String productName;
   String shortDescription;
   String productImage;
-
   String longDescription;
   String price;
 
